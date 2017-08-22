@@ -4,6 +4,13 @@ TangoMan Entity Helper
 **TangoMan Entity Helper** provides Getters and Setters for common properties.
 
 
+Features
+--------
+
+ - Included asserts with custom messages (french) for property validation.
+ - All setters fluent, allowing chaining.
+
+
 How to install
 --------------
 
@@ -25,27 +32,37 @@ Add "use" statement just like when you're using a trait.
 
 namespace AppBundle\Entity;
 
-use TangoMan\EntityHelper\Categorized;
-use TangoMan\EntityHelper\Embeddable;
-use TangoMan\EntityHelper\Featurable;
-use TangoMan\EntityHelper\HasClickDate;
-use TangoMan\EntityHelper\HasIcon;
-use TangoMan\EntityHelper\HasAddress;
-use TangoMan\EntityHelper\HasLabel;
-use TangoMan\EntityHelper\HasName;
-use TangoMan\EntityHelper\HasSummary;
-use TangoMan\EntityHelper\HasText;
-use TangoMan\EntityHelper\HasTitle;
-use TangoMan\EntityHelper\HasType;
-use TangoMan\EntityHelper\HasViews;
-use TangoMan\EntityHelper\Illustrable;
-use TangoMan\EntityHelper\Privatable;
-use TangoMan\EntityHelper\Publishable;
-use TangoMan\EntityHelper\Sluggable;
-use TangoMan\EntityHelper\Timestampable;
-use TangoMan\EntityHelper\UploadableDocument;
-use TangoMan\EntityHelper\UploadableImage;
-use TangoMan\EntityHelper\UserInfos;
+use Tangoman\EntityHelper\Categorized;
+use Tangoman\EntityHelper\Embeddable;
+use Tangoman\EntityHelper\Featurable;
+use Tangoman\EntityHelper\HasAddress;
+use Tangoman\EntityHelper\HasBirthDate;
+use Tangoman\EntityHelper\HasClickDate;
+use Tangoman\EntityHelper\HasEmail;
+use Tangoman\EntityHelper\HasFirstAndLastName;
+use Tangoman\EntityHelper\HasFontAwesomeIcon;
+use Tangoman\EntityHelper\HasGender;
+use Tangoman\EntityHelper\HasGlyphicon;
+use Tangoman\EntityHelper\HasIcon;
+use Tangoman\EntityHelper\HasLabel;
+use Tangoman\EntityHelper\HasName;
+use Tangoman\EntityHelper\HasPhone;
+use Tangoman\EntityHelper\HasSummary;
+use Tangoman\EntityHelper\HasText;
+use Tangoman\EntityHelper\HasTimePeriod;
+use Tangoman\EntityHelper\HasTitle;
+use Tangoman\EntityHelper\HasType;
+use Tangoman\EntityHelper\HasViews;
+use Tangoman\EntityHelper\HasWork;
+use Tangoman\EntityHelper\Illustrable;
+use Tangoman\EntityHelper\Privatable;
+use Tangoman\EntityHelper\Publishable;
+use Tangoman\EntityHelper\Sluggable;
+use Tangoman\EntityHelper\Slugify;
+use Tangoman\EntityHelper\Timestampable;
+use Tangoman\EntityHelper\UploadableDocument;
+use Tangoman\EntityHelper\UploadableImage;
+
 
 /**
  * Class Foobar
@@ -58,23 +75,33 @@ class Foobar
     use Embeddable;
     use Featurable;
     use HasAddress;
+    use HasBirthDate;
     use HasClickDate;
+    use HasEmail;
+    use HasFirstAndLastName;
+    use HasFontAwesomeIcon;
+    use HasGender;
+    use HasGlyphicon;
     use HasIcon;
     use HasLabel;
     use HasName;
+    use HasPhone;
     use HasSummary;
     use HasText;
+    use HasTimePeriod;
     use HasTitle;
     use HasType;
     use HasViews;
+    use HasWork;
     use Illustrable;
     use Privatable;
     use Publishable;
     use Sluggable;
+    use Slugify;
     use Timestampable;
     use UploadableDocument;
     use UploadableImage;
-    use UserInfos;
+
 }
 ```
 

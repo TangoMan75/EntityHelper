@@ -11,13 +11,13 @@ Trait HasAddress
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
-    private $street;
+    protected $street;
 
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
-    private $street2;
+    protected $street2;
 
     /**
      * @var string
@@ -27,7 +27,7 @@ Trait HasAddress
      * )
      * @ORM\Column(type="string", nullable=true)
      */
-    private $city;
+    protected $city;
 
     /**
      * @var integer
@@ -37,7 +37,7 @@ Trait HasAddress
      * )
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $zipCode;
+    protected $zipCode;
 
     /**
      * @var string
@@ -47,7 +47,7 @@ Trait HasAddress
      * )
      * @ORM\Column(type="string", nullable=true)
      */
-    private $country;
+    protected $country;
 
     /**
      * @return string

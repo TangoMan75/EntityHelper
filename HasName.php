@@ -2,6 +2,8 @@
 
 namespace TangoMan\EntityHelper;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Trait HasName
  *
@@ -12,6 +14,10 @@ trait HasName
 {
     /**
      * @var String
+     * @Assert\type(
+     *     type="alpha",
+     *     message="Le nom ne peut contenir que des caractères alphabétiques."
+     * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
     protected $name;

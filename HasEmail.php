@@ -14,5 +14,25 @@ Trait HasEmail
      * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $email;
+    protected $email;
+
+    /**
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return HasEmail
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
 }

@@ -2,6 +2,8 @@
 
 namespace TangoMan\EntityHelper;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Trait HasType
  *
@@ -12,6 +14,10 @@ trait HasType
 {
     /**
      * @var string
+     * @Assert\type(
+     *     type="alpha",
+     *     message="Le type ne peut contenir que des caractères alphabétiques."
+     * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $type;

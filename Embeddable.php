@@ -2,6 +2,8 @@
 
 namespace TangoMan\EntityHelper;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Trait Embeddable
  * 1. Requires entity to own "Categorized" and "HasType" traits.
@@ -13,6 +15,7 @@ trait Embeddable
 {
     /**
      * @var String
+     * @Assert\Url(message="L'url '{{ value }}' doit être dans un format valide.")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $link;
