@@ -18,16 +18,6 @@ Trait HasPhone
     protected $phone;
 
     /**
-     * @var string
-     * @Assert\Regex(
-     *     pattern="/^\+?\[0-9]+/",
-     *     message="Votre numéro de portable doit être dans un format valide."
-     * )
-     * @ORM\Column(type="string", unique=true, nullable=true)
-     */
-    protected $mobile;
-
-    /**
      * @return string
      */
     public function getPhone()
@@ -43,26 +33,6 @@ Trait HasPhone
     public function setPhone($phone)
     {
         $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMobile()
-    {
-        return $this->mobile;
-    }
-
-    /**
-     * @param string $mobile
-     *
-     * @return $this
-     */
-    public function setMobile($mobile)
-    {
-        $this->mobile = $mobile;
 
         return $this;
     }
