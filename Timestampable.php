@@ -4,6 +4,7 @@ namespace TangoMan\EntityHelper;
 
 /**
  * Trait Timestampable
+ *
  * Adds "created" and "modified" timestamps to entity.
  * 1. Requires entity to be marked with "HasLifecycleCallbacks" annotation.
  * 2. Entity constructor must initialize "DateTimeImmutable" object

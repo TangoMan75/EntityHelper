@@ -5,6 +5,11 @@ namespace TangoMan\EntityHelper;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Trait HasWork
+ *
+ * @package TangoMan\EntityHelper
+ */
 Trait HasWork
 {
     /**

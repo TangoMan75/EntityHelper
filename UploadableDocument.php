@@ -8,6 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Trait UploadableDocument
+ *
  * 1. Requires entity to own "Categorized", "Timestampable" and "Sluggable" traits.
  * 2. Requires entity to be marked with "Uploadable" annotation.
  *

@@ -5,6 +5,11 @@ namespace TangoMan\EntityHelper;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Trait HasFirstAndLastName
+ *
+ * @package TangoMan\EntityHelper
+ */
 Trait HasFirstAndLastName
 {
     /**

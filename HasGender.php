@@ -4,6 +4,11 @@ namespace TangoMan\EntityHelper;
 
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * Trait HasGender
+ *
+ * @package TangoMan\EntityHelper
+ */
 Trait HasGender
 {
     /**

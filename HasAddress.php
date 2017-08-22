@@ -5,8 +5,20 @@ namespace TangoMan\EntityHelper;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+/**
+ * Trait HasAddress
+ *
+ * Requires entity to be marked with "HasLifecycleCallbacks" annotation.
+ * @package TangoMan\EntityHelper
+ */
 Trait HasAddress
 {
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $address;
+
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
@@ -54,7 +66,19 @@ Trait HasAddress
      */
     public function getAddress()
     {
-      return $this->street.', '.$this->street2.', '.$this->zipCode.' '.$this->city.', '.$this->country;
+        return $this->address;
+    }
+
+    /**
+     * @param string $address
+     *
+     * @return $this
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
     }
 
     /**
@@ -155,5 +179,15 @@ Trait HasAddress
         $this->city = $city;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function updateAddress()
+    {
+        if (!$this->address){
+            $this->address = $this->street.', '.$this->street2.', '.$this->zipCode.' '.$this->city.', '.$this->country;
+        }
     }
 }
