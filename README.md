@@ -30,6 +30,7 @@ use TangoMan\EntityHelper\Embeddable;
 use TangoMan\EntityHelper\Featurable;
 use TangoMan\EntityHelper\HasClickDate;
 use TangoMan\EntityHelper\HasIcon;
+use TangoMan\EntityHelper\HasAddress;
 use TangoMan\EntityHelper\HasLabel;
 use TangoMan\EntityHelper\HasName;
 use TangoMan\EntityHelper\HasSummary;
@@ -44,6 +45,7 @@ use TangoMan\EntityHelper\Sluggable;
 use TangoMan\EntityHelper\Timestampable;
 use TangoMan\EntityHelper\UploadableDocument;
 use TangoMan\EntityHelper\UploadableImage;
+use TangoMan\EntityHelper\UserInfos;
 
 /**
  * Class Foobar
@@ -55,6 +57,7 @@ class Foobar
     use Categorized;
     use Embeddable;
     use Featurable;
+    use HasAddress;
     use HasClickDate;
     use HasIcon;
     use HasLabel;
@@ -71,6 +74,7 @@ class Foobar
     use Timestampable;
     use UploadableDocument;
     use UploadableImage;
+    use UserInfos;
 }
 ```
 
