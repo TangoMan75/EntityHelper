@@ -10,8 +10,7 @@ Trait HasEmail
     /**
      * @var string
      * @Assert\Email(
-     *     message="L'email '{{ value }}' n'est pas valide.",
-     *     checkMx=true
+     *     message="L'email '{{ value }}' doit être dans un format valide.",
      * )
      * @ORM\Column(type="string", length=255, nullable=true)
      */
