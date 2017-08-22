@@ -45,6 +45,7 @@ use Tangoman\EntityHelper\HasGender;
 use Tangoman\EntityHelper\HasGlyphicon;
 use Tangoman\EntityHelper\HasIcon;
 use Tangoman\EntityHelper\HasLabel;
+use Tangoman\EntityHelper\HasMobile;
 use Tangoman\EntityHelper\HasName;
 use Tangoman\EntityHelper\HasPhone;
 use Tangoman\EntityHelper\HasSummary;
@@ -84,6 +85,7 @@ class Foobar
     use HasGlyphicon;
     use HasIcon;
     use HasLabel;
+    use HasMobile;
     use HasName;
     use HasPhone;
     use HasSummary;
