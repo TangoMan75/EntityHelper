@@ -52,6 +52,14 @@ Trait HasAddress
     /**
      * @return string
      */
+    public function getAddress()
+    {
+      return $this->street.', '.$this->street2.', '.$this->zipCode.' '.$this->city.', '.$this->country;
+    }
+
+    /**
+     * @return string
+     */
     public function getStreet()
     {
         return $this->street;
