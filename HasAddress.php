@@ -92,7 +92,7 @@ Trait HasAddress
     /**
      * @param string $street
      *
-     * @return HasAddress
+     * @return $this
      */
     public function setStreet($street)
     {
@@ -112,7 +112,7 @@ Trait HasAddress
     /**
      * @param string $street2
      *
-     * @return HasAddress
+     * @return $this
      */
     public function setStreet2($street2)
     {
