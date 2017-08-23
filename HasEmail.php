@@ -32,7 +32,7 @@ Trait HasEmail
     /**
      * @param string $email
      *
-     * @return HasEmail
+     * @return $this
      */
     public function setEmail($email)
     {
