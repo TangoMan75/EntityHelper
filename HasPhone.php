@@ -15,7 +15,7 @@ Trait HasPhone
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^\+?\[0-9]+/",
+     *     pattern="/^\+?(\(\d\))?\d+/",
      *     message="Votre numéro de téléphone doit être dans un format valide."
      * )
      * @ORM\Column(type="string", unique=true, nullable=true)
