@@ -14,9 +14,9 @@ trait HasName
 {
     /**
      * @var String
-     * @Assert\type(
-     *     type="alpha",
-     *     message="Le nom ne peut contenir que des caractères alphabétiques."
+     * @Assert\Regex(
+     *     pattern="/[\w \-\.]+/",
+     *     message="Le nom ne peut contenir que des caractères alphabétiques, des espaces, des tirets et des points."
      * )
      * @ORM\Column(type="string", length=255, unique=true)
      */
