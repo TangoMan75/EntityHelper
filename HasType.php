@@ -14,7 +14,7 @@ trait HasType
 {
     /**
      * @var string
-     * @Assert\type(
+     * @Assert\Type(
      *     type="alpha",
      *     message="Le type ne peut contenir que des caractères alphabétiques."
      * )
