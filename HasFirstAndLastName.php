@@ -16,7 +16,7 @@ Trait HasFirstAndLastName
      * @var string
      * @Assert\Type(
      * @Assert\Regex(
-     *     pattern="/^\w[\w ]+",
+     *     pattern="/^\w[\w ]+/"
      *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
@@ -26,7 +26,7 @@ Trait HasFirstAndLastName
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^\w[\w ]+",
+     *     pattern="/^\w[\w ]+/"
      *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
