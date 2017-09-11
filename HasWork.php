@@ -20,9 +20,9 @@ Trait HasWork
 
     /**
      * @var string
-     * @Assert\Type(
-     *     type="alpha",
-     *     message="Le titre de votre poste ne peut contenir que des caractères alphabétiques."
+     * @Assert\Regex(
+     *     pattern="/^\w[\w ]+",
+     *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
      */
