@@ -34,7 +34,7 @@ Trait HasAddress
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^\w[\w ]+/"
+     *     pattern="/^\w[\w ]+/",
      *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
@@ -54,7 +54,7 @@ Trait HasAddress
     /**
      * @var string
      * @Assert\Regex(
-     *     pattern="/^\w[\w ]+/"
+     *     pattern="/^\w[\w ]+/",
      *     message="Le pays ne peut contenir que des caractères alphabétiques ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
