@@ -18,7 +18,7 @@ Trait HasPhone
      *     pattern="/^\+?(\(\d\))?\d+/",
      *     message="Votre numéro de téléphone doit être dans un format valide."
      * )
-     * @ORM\Column(type="string", unique=true, nullable=true)
+     * @ORM\Column(type="string", length=20, unique=true, nullable=true)
      */
     protected $phone;
 
