@@ -1,8 +1,7 @@
 TangoMan Entity Helper
 ==========================
 
-**TangoMan Entity Helper** provides Getters and Setters for common properties.
-
+**TangoMan Entity Helper** provides magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships and Getters and Setters for common properties.
 
 Features
 --------
@@ -10,16 +9,14 @@ Features
  - Included asserts with custom messages (french) for property validation.
  - All setters fluent, allowing chaining.
 
-
 How to install
 --------------
 
-With composer 
+With composer
 
 ```console
 $ composer require tangoman/entity-helper
 ```
-
 
 How to use
 ----------
@@ -64,7 +61,6 @@ use Tangoman\EntityHelper\Timestampable;
 use Tangoman\EntityHelper\UploadableDocument;
 use Tangoman\EntityHelper\UploadableImage;
 
-
 /**
  * Class Foobar
  *
@@ -103,7 +99,6 @@ class Foobar
     use Timestampable;
     use UploadableDocument;
     use UploadableImage;
-
 }
 ```
 
@@ -112,7 +107,6 @@ Don't forget to update database schema
 ```console
 $ php bin/console schema:update
 ```
-
 
 Note
 ====
