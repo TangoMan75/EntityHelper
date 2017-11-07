@@ -4,24 +4,72 @@ TangoMan Entity Helper
 **TangoMan Entity Helper** provides magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships and Getters and Setters for common properties.
 
 Features
---------
+========
 
+ - Magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships.
  - Included asserts with custom messages (french) for property validation.
- - All setters fluent, allowing chaining.
+ - Fluent setters for all properties, allowing chaining.
 
-How to install
---------------
+Installation
+============
 
-With composer
+Step 1: Download the Helper
+---------------------------
 
-```console
+Open a command console, enter your project directory and execute the
+following command to download the latest stable version of this helper:
+
+```bash
 $ composer require tangoman/entity-helper
 ```
 
-How to use
-----------
+This command requires you to have Composer installed globally, as explained
+in the [installation chapter](https://getcomposer.org/doc/00-intro.md)
+of the Composer documentation.
 
-Inside your entity:
+Step 2: Enable VichUploader
+---------------------------
+
+Since **TangoMan Entity Helper** requires VichUploaderBundle,
+if you plan to use UploadableDocument, or UploadableImage traits,
+enable the bundle by adding it to the list of registered bundles
+in the `app/AppKernel.php` file of your project:
+
+```php
+<?php
+// app/AppKernel.php
+
+// ...
+class AppKernel extends Kernel
+{
+    // ...
+
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Vich\UploaderBundle\VichUploaderBundle(),
+        );
+
+        // ...
+    }
+}
+```
+
+Step 3: Update your database shema
+----------------------------------
+
+Open a command console, enter your project directory and execute the
+following command to update your database schema:
+
+```console
+$ php bin/console schema:update
+```
+
+Usage
+=====
+
+Inside your entity class:
 Add "use" statement just like when you're using a trait.
 
 ```php
@@ -29,37 +77,41 @@ Add "use" statement just like when you're using a trait.
 
 namespace AppBundle\Entity;
 
-use Tangoman\EntityHelper\Categorized;
-use Tangoman\EntityHelper\Embeddable;
-use Tangoman\EntityHelper\Featurable;
-use Tangoman\EntityHelper\HasAddress;
-use Tangoman\EntityHelper\HasBirthDate;
-use Tangoman\EntityHelper\HasClickDate;
-use Tangoman\EntityHelper\HasEmail;
-use Tangoman\EntityHelper\HasFirstAndLastName;
-use Tangoman\EntityHelper\HasFontAwesomeIcon;
-use Tangoman\EntityHelper\HasGender;
-use Tangoman\EntityHelper\HasGlyphicon;
-use Tangoman\EntityHelper\HasIcon;
-use Tangoman\EntityHelper\HasLabel;
-use Tangoman\EntityHelper\HasMobile;
-use Tangoman\EntityHelper\HasName;
-use Tangoman\EntityHelper\HasPhone;
-use Tangoman\EntityHelper\HasSummary;
-use Tangoman\EntityHelper\HasText;
-use Tangoman\EntityHelper\HasTimePeriod;
-use Tangoman\EntityHelper\HasTitle;
-use Tangoman\EntityHelper\HasType;
-use Tangoman\EntityHelper\HasViews;
-use Tangoman\EntityHelper\HasWork;
-use Tangoman\EntityHelper\Illustrable;
-use Tangoman\EntityHelper\Privatable;
-use Tangoman\EntityHelper\Publishable;
-use Tangoman\EntityHelper\Sluggable;
-use Tangoman\EntityHelper\Slugify;
-use Tangoman\EntityHelper\Timestampable;
-use Tangoman\EntityHelper\UploadableDocument;
-use Tangoman\EntityHelper\UploadableImage;
+use TangoMan\EntityHelper\Traits\Categorized;
+use TangoMan\EntityHelper\Traits\Embeddable;
+use TangoMan\EntityHelper\Traits\Featurable;
+use TangoMan\EntityHelper\Traits\HasAddress;
+use TangoMan\EntityHelper\Traits\HasBirthDate;
+use TangoMan\EntityHelper\Traits\HasClickDate;
+use TangoMan\EntityHelper\Traits\HasEmail;
+use TangoMan\EntityHelper\Traits\HasFirstAndLastName;
+use TangoMan\EntityHelper\Traits\HasFontAwesomeIcon;
+use TangoMan\EntityHelper\Traits\HasGender;
+use TangoMan\EntityHelper\Traits\HasGlyphicon;
+use TangoMan\EntityHelper\Traits\HasIcon;
+use TangoMan\EntityHelper\Traits\HasLabel;
+use TangoMan\EntityHelper\Traits\HasMobile;
+use TangoMan\EntityHelper\Traits\HasName;
+use TangoMan\EntityHelper\Traits\HasPhone;
+use TangoMan\EntityHelper\Traits\HasRelationships;
+use TangoMan\EntityHelper\Traits\HasRoles;
+use TangoMan\EntityHelper\Traits\HasSummary;
+use TangoMan\EntityHelper\Traits\HasText;
+use TangoMan\EntityHelper\Traits\HasTimePeriod;
+use TangoMan\EntityHelper\Traits\HasTitle;
+use TangoMan\EntityHelper\Traits\HasType;
+use TangoMan\EntityHelper\Traits\HasViews;
+use TangoMan\EntityHelper\Traits\HasWebsite;
+use TangoMan\EntityHelper\Traits\HasWork;
+use TangoMan\EntityHelper\Traits\Illustrable;
+use TangoMan\EntityHelper\Traits\JsonSerializable;
+use TangoMan\EntityHelper\Traits\Privatable;
+use TangoMan\EntityHelper\Traits\Publishable;
+use TangoMan\EntityHelper\Traits\Sluggable;
+use TangoMan\EntityHelper\Traits\Slugify;
+use TangoMan\EntityHelper\Traits\Timestampable;
+use TangoMan\EntityHelper\Traits\UploadableDocument;
+use TangoMan\EntityHelper\Traits\UploadableImage;
 
 /**
  * Class Foobar
@@ -84,14 +136,18 @@ class Foobar
     use HasMobile;
     use HasName;
     use HasPhone;
+    use HasRelationships;
+    use HasRoles;
     use HasSummary;
     use HasText;
     use HasTimePeriod;
     use HasTitle;
     use HasType;
     use HasViews;
+    use HasWebsite;
     use HasWork;
     use Illustrable;
+    use JsonSerializable;
     use Privatable;
     use Publishable;
     use Sluggable;
@@ -99,13 +155,9 @@ class Foobar
     use Timestampable;
     use UploadableDocument;
     use UploadableImage;
+
+    // ...
 }
-```
-
-Don't forget to update database schema
-
-```console
-$ php bin/console schema:update
 ```
 
 Note
