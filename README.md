@@ -1,7 +1,7 @@
 TangoMan Entity Helper
 ==========================
 
-**TangoMan Entity Helper** provides magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships and Getters and Setters for common properties.
+**TangoMan Entity Helper** provides magic methods for relationships, JsonSerializable, Getters and Setters for common properties.
 
 Features
 ========
@@ -9,6 +9,7 @@ Features
  - Magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships.
  - Included asserts with custom messages (french) for property validation.
  - Fluent setters for all properties, allowing chaining.
+ - Magic JsonSerialisable.
 
 Installation
 ============
@@ -30,8 +31,8 @@ of the Composer documentation.
 Step 2: Enable VichUploader
 ---------------------------
 
-Since **TangoMan Entity Helper** requires VichUploaderBundle,
-if you plan to use UploadableDocument, or UploadableImage traits,
+Since **TangoMan Entity Helper** requires [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle),
+if you plan to use **UploadableDocument**, or **UploadableImage** traits,
 enable the bundle by adding it to the list of registered bundles
 in the `app/AppKernel.php` file of your project:
 
@@ -56,8 +57,13 @@ class AppKernel extends Kernel
 }
 ```
 
-Step 3: Update your database shema
-----------------------------------
+Step 3: Implement your entities
+-------------------------------
+
+Add "use" statements inside your entities for desired traits. See below for full list of availlable traits.
+
+Step 4: Update your database schema
+-----------------------------------
 
 Open a command console, enter your project directory and execute the
 following command to update your database schema:
@@ -70,12 +76,20 @@ Usage
 =====
 
 Inside your entity class:
-Add "use" statement just like when you're using a trait.
+Some traits will require your entity class to use `Symfony\Component\Validator\Constraints` for validation.
+**UploadableDocument** and **UploadableImage** traits will require your entity class to use `Vich\UploaderBundle\Mapping\Annotation as Vich` annotation.
 
+`src\AppBundle\Entity\FooBar.php`
 ```php
 <?php
 
 namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
+// ...
 
 use TangoMan\EntityHelper\Traits\Categorized;
 use TangoMan\EntityHelper\Traits\Embeddable;
@@ -158,6 +172,131 @@ class Foobar
 
     // ...
 }
+```
+
+Trait HasRelationships
+======================
+
+This trait provide magic methods to handle both OWNING and INVERSE side of bidirectional relationships.
+
+ - Both entities MUST use `HasRelationships` trait.
+ - Both entities MUST define properties with appropriate annotations.
+ - `cascade={"persist"}` annotation is MANDATORY (will allow bidirectional linking between entities).
+
+OneToOne relationships
+----------------------
+
+- `cascade={"remove"}` will avoid orphan `Item` on `Owner` deletion (optional).
+
+```php
+use Doctrine\ORM\Mapping as ORM;
+
+// ...
+
+/**
+ * @var Item
+ * @ORM\OneToOne(targetEntity="AppBundle\Entity\Item", inversedBy="owner", cascade={"persist", "remove"})
+ */
+ private $item;
+```
+
+ManyToMany relationships
+------------------------
+
+### Entity
+
+#### Properties
+
+- property must own `@var ArrayCollection`
+- `@ORM\OrderBy({"id"="DESC"})` will allow to define custom orderBy when fetching `items` (optional).
+
+`src\AppBundle\Entity\Item.php`
+```php
+namespace AppBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
+
+// ...
+
+/**
+ * @var ArrayCollection
+ * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Item", inversedBy="owners", cascade={"persist"})
+ * @ORM\OrderBy({"id"="DESC"})
+ */
+private $items = [];
+```
+
+#### Constructor
+
+Constructor must initialize mapped property with `ArrayCollection`
+
+`src\AppBundle\Entity\Item.php`
+```php
+/**
+ * Owner constructor.
+ */
+public function __construct()
+{
+    $this->Items = new ArrayCollection();
+}
+```
+
+### FormTypes
+
+Requires formType to own `'by_reference' => false,` attribute to force use of `add` and `remove` methods.
+
+`src\AppBundle\Form\ItemType.php`
+```php
+/**
+ * @param FormBuilderInterface $builder
+ * @param array                $options
+ */
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        ->add(
+            'owner',
+            EntityType::class,
+            [
+                'label'         => 'Owner',
+                'placeholder'   => 'Select owner',
+                'class'         => 'AppBundle:Owner',
+                'by_reference'  => false,
+                'multiple'      => true,
+                'expanded'      => false,
+                'required'      => false,
+                'query_builder' => function (EntityRepository $em) {
+                    return $em->createQueryBuilder('o')
+                        ->orderBy('o.name');
+                },
+            ]
+        );
+}
+```
+
+Trait JsonSerializable
+======================
+
+Magic method to make your entities [jsonserializable](http://php.net/manual/en/class.jsonserializable.php).
+Allows to use php `json_encode()` function on your object.
+```php
+$fooBar = new FooBar;
+$json = json_encode($fooBar, JSON_PRETTY_PRINT);
+echo $json;
+```
+
+In order to use php JsonSerializable interface on your object your class must implement `\JsonSerializable`
+`src\AppBundle\Entity\FooBar.php`
+```php
+namespace AppBundle\Entity;
+
+use TangoMan\EntityHelper\Traits\JsonSerializable;
+
+class FooBar implements \JsonSerializable {
+    use JsonSerializable;
+
+    // ...
 ```
 
 Note
