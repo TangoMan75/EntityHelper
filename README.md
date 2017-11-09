@@ -1,12 +1,11 @@
 TangoMan Entity Helper
 ==========================
 
-**TangoMan Entity Helper** provides magic methods for relationships, JsonSerializable, Getters and Setters for common properties.
+**TangoMan Entity Helper** provides magic methods for JsonSerializable, Getters and Setters for common properties.
 
 Features
 ========
 
- - Magic methods for OneToOne, OneToMany, ManyToOne, ManyToMany, relationships.
  - Included asserts with custom messages (french) for property validation.
  - Fluent setters for all properties, allowing chaining.
  - Magic JsonSerialisable.
