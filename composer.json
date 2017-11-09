@@ -1,12 +1,16 @@
 {
     "name": "tangoman/entity-helper",
     "description": "Symfony Entity Helper",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "license": "MIT",
     "authors": [
         {
             "name": "Matthias Morin",
             "email": "matthias.morin@gmail.com"
+        }
+        {
+            "name": "Fabrice Lazzarotto",
+            "email": "fabrice.lazzarotto@gmail.com"
         }
     ],
     "type": "library",
