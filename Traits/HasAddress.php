@@ -202,51 +202,12 @@ Trait HasAddress
     }
 
     /**
-     * @param float $lat
-     *
-     * @return $this
-     */
-    public function setLat($lat)
-    {
-        $this->lat = $lat;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLat()
-    {
-        return $this->lat;
-    }
-
-    /**
-     * @param float $lng
-     *
-     * @return $this
-     */
-    public function setLng($lng)
-    {
-        $this->lng = $lng;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getLng()
-    {
-        return $this->lng;
-    }
-
-    /**
      * @return string
      */
     public function getFullAddress()
     {
         $address = [];
+
         if ($this->getStreet()) {
             $address[] = $this->getStreet();
         }

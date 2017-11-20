@@ -3,7 +3,7 @@
 namespace TangoMan\EntityHelper\Model;
 
 use TangoMan\EntityHelper\Traits\HasAddress;
-use TangoMan\EntityHelper\Traits\JsonSerializable;
+use TangoMan\EntityHelper\Traits\HasCoordinates;
 
 /**
  * Class Address
@@ -14,7 +14,7 @@ use TangoMan\EntityHelper\Traits\JsonSerializable;
 class Address implements \JsonSerializable
 {
     use HasAddress;
-    use JsonSerializable;
+    use HasCoordinates;
 
     /**
      * @ORM\PreUpdate()
@@ -22,8 +22,24 @@ class Address implements \JsonSerializable
     public function updateAddress()
     {
         if (!$this->address) {
-            $this->address = $this->__toString();
+            $this->address = $this->getFullAddress();
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        $address['street'] = $this->getStreet();
+        $address['street2'] = $this->getStreet2();
+        $address['zipcode'] = $this->getZipCode();
+        $address['city'] = $this->getCity();
+        $address['country'] = $this->getCountry();
+        $address['lat'] = $this->getLat();
+        $address['lng'] = $this->getLng();
+
+        return $address;
     }
 
     /**
@@ -31,23 +47,6 @@ class Address implements \JsonSerializable
      */
     public function __toString()
     {
-        $address = [];
-        if ($this->street) {
-            $address[] = $this->street;
-        }
-        if ($this->street2) {
-            $address[] = $this->street2;
-        }
-        if ($this->zipCode) {
-            $address[] = $this->zipCode;
-        }
-        if ($this->city) {
-            $address[] = $this->city;
-        }
-        if ($this->country) {
-            $address[] = $this->country;
-        }
-
-        return implode(', ', $address);
+        return $this->getFullAddress();
     }
 }
