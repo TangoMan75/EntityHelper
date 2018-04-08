@@ -87,6 +87,7 @@ trait Embeddable
                     $this->type  = 'youtube';
                     $this->image = '//i.ytimg.com/vi/'.$this->getHash($link)
                                    .'/maxresdefault.jpg';
+//                                   .'/mqdefault.jpg';
 //                                   .'/hqdefault.jpg';
                     break;
                 case 'vimeo.com':
