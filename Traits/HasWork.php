@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -8,10 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Trait HasWork
  *
- * @package TangoMan\EntityHelper
+ * @package TangoMan\EntityHelper\Traits
  */
 Trait HasWork
 {
+
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
@@ -22,7 +29,8 @@ Trait HasWork
      * @var string
      * @Assert\Regex(
      *     pattern="/^\w[\w ]+/",
-     *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
+     *     message="La ville ne peut contenir que des caractères alphabétiques
+     *     ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
      */

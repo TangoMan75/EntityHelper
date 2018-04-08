@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -8,14 +14,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Trait Embeddable
  * 1. Requires entity to own "Categorized" and "HasType" traits.
  *
- * @author  Matthias Morin <tangoman@free.fr>
- * @package TangoMan\EntityHelper
+ * @author  Matthias Morin <matthias.morin@gmail.com>
+ * @package TangoMan\EntityHelper\Traits
  */
 trait Embeddable
 {
+
     /**
      * @var String
-     * @Assert\Url(message="L'url '{{ value }}' doit être dans un format valide.")
+     * @Assert\Url(message="L'url '{{ value }}' doit être dans un format
+     *                            valide.")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $link;
@@ -40,26 +48,30 @@ trait Embeddable
 
         // Remove scheme from url (doesn't change relative URLs)
         $this->link = '//'.
-            (isset($result['user']) ? $result['user'] : '').
-            (isset($result['pass']) ? ':'.$result['pass'].'@' : '').
-            $result['host'].
-            (isset($result['port']) ? ':'.$result['port'] : '').
-            (isset($result['path']) ? $result['path'] : '').
-            (isset($result['query']) ? '?'.$result['query'] : '').
-            (isset($result['fragment']) ? '#'.$result['fragment'] : '');
+                      (isset($result['user']) ? $result['user'] : '').
+                      (isset($result['pass']) ? ':'.$result['pass'].'@' : '').
+                      $result['host'].
+                      (isset($result['port']) ? ':'.$result['port'] : '').
+                      (isset($result['path']) ? $result['path'] : '').
+                      (isset($result['query']) ? '?'.$result['query'] : '').
+                      (isset($result['fragment']) ? '#'.$result['fragment']
+                          : '');
 
         // Set post type and thumbnail according to url
         if (isset($result['host'])) {
             switch ($result['host']) {
                 case 'www.car360app.com':
                 case 'www.argus360.fr':
-                    $this->type = 'argus360';
-                    $this->image = '//car360app.com/viewer/?spin='.$this->getHash($link).'&res=640x360&angle=45';
+                    $this->type  = 'argus360';
+                    $this->image = '//car360app.com/viewer/?spin='
+                                   .$this->getHash($link)
+                                   .'&res=640x360&angle=45';
                     break;
                 case 'dai.ly':
                 case 'www.dailymotion.com':
-                    $this->type = 'dailymotion';
-                    $this->image = '//www.dailymotion.com/thumbnail/video/'.$this->getHash($link);
+                    $this->type  = 'dailymotion';
+                    $this->image = '//www.dailymotion.com/thumbnail/video/'
+                                   .$this->getHash($link);
                     break;
                 case 'giphy.com':
                     $this->type = 'giphy';
@@ -72,13 +84,18 @@ trait Embeddable
                     break;
                 case 'www.youtube.com':
                 case 'youtu.be':
-                    $this->type = 'youtube';
-                    $this->image = '//i.ytimg.com/vi/'.$this->getHash($link).'/hqdefault.jpg';
+                    $this->type  = 'youtube';
+                    $this->image = '//i.ytimg.com/vi/'.$this->getHash($link)
+                                   .'/hqdefault.jpg';
                     break;
                 case 'vimeo.com':
-                    $this->type = 'vimeo';
-                    $xml = unserialize(
-                        file_get_contents('http://vimeo.com/api/v2/video/'.$this->getHash($link).'.php')
+                    $this->type  = 'vimeo';
+                    $xml         = unserialize(
+                        file_get_contents(
+                            'http://vimeo.com/api/v2/video/'.$this->getHash(
+                                $link
+                            ).'.php'
+                        )
                     );
                     $this->image = $xml[0]['thumbnail_medium'];
                     break;
@@ -98,39 +115,45 @@ trait Embeddable
         if ($this->link) {
             switch ($this->type) {
                 case 'argus360':
-                    return '<iframe src="//car360app.com/viewer/portable.php?spin='.
-                        $this->getHash($this->link).
-                        '&res=1920x1080&maximages=-1&frameSize=1920x1080"></iframe>';
+                    return '<iframe src="//car360app.com/viewer/portable.php?spin='
+                           .
+                           $this->getHash($this->link).
+                           '&res=1920x1080&maximages=-1&frameSize=1920x1080"></iframe>';
                     break;
                 case 'dailymotion':
-                    return '<iframe frameborder="0" width="480" height="270" src="//www.dailymotion.com/embed/video/'.
-                        $this->getHash($this->link).
-                        '?autoplay=0&mute=1" allowfullscreen></iframe>';
+                    return '<iframe frameborder="0" width="480" height="270" src="//www.dailymotion.com/embed/video/'
+                           .
+                           $this->getHash($this->link).
+                           '?autoplay=0&mute=1" allowfullscreen></iframe>';
                     break;
                 case 'giphy':
                     return '<iframe src="//giphy.com/embed/'.
-                        $this->getHash($this->link).
-                        '" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>';
+                           $this->getHash($this->link).
+                           '" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>';
                     break;
                 case 'gist':
                     return '<script src="//gist.github.com/'.
-                        $this->getHash($this->link).
-                        '.js"></script>';
+                           $this->getHash($this->link).
+                           '.js"></script>';
                     break;
                 case 'tweet':
-                    $json = file_get_contents('https://publish.twitter.com/oembed?url=https:'.urlencode($this->link));
+                    $json = file_get_contents(
+                        'https://publish.twitter.com/oembed?url=https:'
+                        .urlencode($this->link)
+                    );
 
                     return json_decode($json, true)['html'];
                     break;
                 case 'vimeo':
                     return '<iframe src="//player.vimeo.com/video/'.
-                        $this->getHash($this->link).
-                        '?color=ffffff" width="640" height="267" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
+                           $this->getHash($this->link).
+                           '?color=ffffff" width="640" height="267" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
                     break;
                 case 'youtube':
-                    return '<iframe allowfullscreen width="420" height="315" src="//www.youtube.com/embed/'.
-                        $this->getHash($this->link).
-                        '"></iframe>';
+                    return '<iframe allowfullscreen width="420" height="315" src="//www.youtube.com/embed/'
+                           .
+                           $this->getHash($this->link).
+                           '"></iframe>';
                     break;
                 default:
                     return null;
@@ -178,6 +201,7 @@ trait Embeddable
                 if (stripos($temp, '_')) {
                     return strstr($temp, '_', true);
                 }
+
                 return $temp;
                 break;
             case 'giphy.com':

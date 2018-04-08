@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -9,14 +15,16 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * Trait UploadableImage
  *
- * 1. Requires entity to own "Categorized", "Timestampable", "Illustrable" and "Sluggable" traits.
+ * 1. Requires entity to own "Categorized", "Timestampable", "Illustrable" and
+ * "Sluggable" traits.
  * 2. Requires entity to be marked with "Uploadable" annotation.
  *
- * @author  Matthias Morin <tangoman@free.fr>
- * @package TangoMan\EntityHelper
+ * @author  Matthias Morin <matthias.morin@gmail.com>
+ * @package TangoMan\EntityHelper\Traits
  */
 trait UploadableImage
 {
+
     /**
      * @var string
      * @ORM\Column(type="text", nullable=true)
@@ -107,7 +115,8 @@ trait UploadableImage
     public function getImagePrettyFileName()
     {
         // Returns string left part before last dash
-        return substr($this->slug, 0, strrpos($this->slug, '-')).'.'.$this->getImageExtension();
+        return substr($this->slug, 0, strrpos($this->slug, '-')).'.'
+               .$this->getImageExtension();
     }
 
     /**
@@ -131,7 +140,7 @@ trait UploadableImage
 
         if ($imageFileName) {
             $this->setImage('/uploads/images/'.$imageFileName);
-            if (!$this->link) {
+            if ( ! $this->link) {
                 $this->link = '/uploads/images/'.$imageFileName;
             }
         } else {
@@ -153,7 +162,8 @@ trait UploadableImage
     {
         if ($this->hasCategory('photo') || $this->hasCategory('thetas')) {
             // Get thumbnail path
-            $path = __DIR__."/../../../web/media/cache/thumbnail".$this->getImage();
+            $path = __DIR__."/../../../web/media/cache/thumbnail"
+                    .$this->getImage();
 
             // Delete file if exists
             if (is_file($path)) {

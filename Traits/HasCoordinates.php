@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -8,10 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Trait HasCoordinates
  *
- * @package TangoMan\EntityHelper
+ * @package TangoMan\EntityHelper\Traits
  */
 Trait HasCoordinates
 {
+
     /**
      * @var float
      * @Assert\Type(
@@ -26,7 +33,8 @@ Trait HasCoordinates
      * @var float
      * @Assert\Type(
      *     type="digit",
-     *     message="La longitude ne peut contenir que des caractères numériques."
+     *     message="La longitude ne peut contenir que des caractères
+     *     numériques."
      * )
      * @ORM\Column(name="lng", type="string", length=255, nullable=true)
      */

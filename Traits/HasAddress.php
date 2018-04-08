@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -9,10 +15,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Trait HasAddress
  * Requires entity to be marked with "HasLifecycleCallbacks" annotation.
  *
- * @package TangoMan\EntityHelper
+ * @package TangoMan\EntityHelper\Traits
  */
 Trait HasAddress
 {
+
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
@@ -35,7 +42,8 @@ Trait HasAddress
      * @var string
      * @Assert\Regex(
      *     pattern="/^\w[\w ]+/",
-     *     message="La ville ne peut contenir que des caractères alphabétiques ou des espaces."
+     *     message="La ville ne peut contenir que des caractères alphabétiques
+     *     ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
      */
@@ -45,7 +53,8 @@ Trait HasAddress
      * @var integer
      * @Assert\Type(
      *     type="digit",
-     *     message="Le code postal ne peut contenir que des caractères numériques."
+     *     message="Le code postal ne peut contenir que des caractères
+     *     numériques."
      * )
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -55,7 +64,8 @@ Trait HasAddress
      * @var string
      * @Assert\Regex(
      *     pattern="/^\w[\w ]+/",
-     *     message="Le pays ne peut contenir que des caractères alphabétiques ou des espaces."
+     *     message="Le pays ne peut contenir que des caractères alphabétiques
+     *     ou des espaces."
      * )
      * @ORM\Column(type="string", nullable=true)
      */
@@ -75,7 +85,8 @@ Trait HasAddress
      * @var float
      * @Assert\Type(
      *     type="digit",
-     *     message="La longitude ne peut contenir que des caractères numériques."
+     *     message="La longitude ne peut contenir que des caractères
+     *     numériques."
      * )
      * @ORM\Column(name="lng", type="string", length=255, nullable=true)
      */

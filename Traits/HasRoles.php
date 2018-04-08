@@ -1,15 +1,22 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
 /**
  * Trait HasRoles
  *
- * @author  Matthias Morin <tangoman@free.fr>
- * @package TangoMan\EntityHelper
+ * @author  Matthias Morin <matthias.morin@gmail.com>
+ * @package TangoMan\EntityHelper\Traits
  */
 trait HasRoles
 {
+
     /**
      * @var array
      * @ORM\Column(type="simple_array", nullable=true)
@@ -36,10 +43,11 @@ trait HasRoles
         // Every user has "ROLE_USER"
         if (empty($roles)) {
             $roles[] = 'ROLE_USER';
+
             return $this->roles;
         }
 
-        if (!in_array('ROLE_USER', $roles)) {
+        if ( ! in_array('ROLE_USER', $roles)) {
             $roles[] = 'ROLE_USER';
         }
 
@@ -75,7 +83,7 @@ trait HasRoles
     {
         $role = strtoupper($role);
 
-        if (!in_array($role, $this->roles)) {
+        if ( ! in_array($role, $this->roles)) {
             $this->roles[] = $role;
         }
 
@@ -94,7 +102,7 @@ trait HasRoles
         $roles = $this->roles;
 
         if (in_array($role, $roles)) {
-            $remove[] = $role;
+            $remove[]    = $role;
             $this->roles = array_diff($roles, $remove);
         }
 

@@ -1,4 +1,10 @@
 <?php
+/**
+ * Copyright (c) 2018 Matthias Morin <matthias.morin@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace TangoMan\EntityHelper\Traits;
 
@@ -6,16 +12,18 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Trait Categorized
- * This class is designed to provide a simple and straitforward way to categorize entities.
+ * This class is designed to provide a simple and straitforward way to
+ * categorize entities.
  * 1. Requires entity to be marked with "HasLifecycleCallbacks" annotation.
  * 2. Requires entity to own "HasType" trait.
  * 3. Note: Entities can own one type only, but can have several categories.
  *
- * @author  Matthias Morin <tangoman@free.fr>
- * @package TangoMan\EntityHelper
+ * @author  Matthias Morin <matthias.morin@gmail.com>
+ * @package TangoMan\EntityHelper\Traits
  */
 trait Categorized
 {
+
     /**
      * @var array|ArrayCollection
      * @ORM\Column(type="simple_array", nullable=true)
@@ -27,31 +35,32 @@ trait Categorized
      *
      * @var array
      */
-    protected $assoc = [
-        'csv'         => 'document',
-        'doc'         => 'document',
-        'ods'         => 'document',
-        'odt'         => 'document',
-        'pdf'         => 'document',
-        'pptx'        => 'document',
-        'txt'         => 'document',
-        'xls'         => 'document',
-        'article'     => 'post',
-        'message'     => 'post',
-        'comment'     => 'post',
-        'gif'         => 'image',
-        'jpeg'        => 'image',
-        'jpg'         => 'image',
-        'png'         => 'image',
-        'dailymotion' => 'embed',
-        'giphy'       => 'embed',
-        'gist'        => 'embed',
-        'tweet'       => 'embed',
-        'vimeo'       => 'embed',
-        'youtube'     => 'embed',
-        'argus360'    => '360',
-        'thetas'      => '360',
-    ];
+    protected $assoc
+        = [
+            'csv'         => 'document',
+            'doc'         => 'document',
+            'ods'         => 'document',
+            'odt'         => 'document',
+            'pdf'         => 'document',
+            'pptx'        => 'document',
+            'txt'         => 'document',
+            'xls'         => 'document',
+            'article'     => 'post',
+            'message'     => 'post',
+            'comment'     => 'post',
+            'gif'         => 'image',
+            'jpeg'        => 'image',
+            'jpg'         => 'image',
+            'png'         => 'image',
+            'dailymotion' => 'embed',
+            'giphy'       => 'embed',
+            'gist'        => 'embed',
+            'tweet'       => 'embed',
+            'vimeo'       => 'embed',
+            'youtube'     => 'embed',
+            'argus360'    => '360',
+            'thetas'      => '360',
+        ];
 
     /**
      * @param array $categories
@@ -92,7 +101,7 @@ trait Categorized
      */
     public function addCategory($category)
     {
-        if (!in_array($category, (array)$this->categories)) {
+        if ( ! in_array($category, (array)$this->categories)) {
             $this->categories[] = $category;
         }
 
