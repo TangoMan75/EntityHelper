@@ -86,7 +86,8 @@ trait Embeddable
                 case 'youtu.be':
                     $this->type  = 'youtube';
                     $this->image = '//i.ytimg.com/vi/'.$this->getHash($link)
-                                   .'/hqdefault.jpg';
+                                   .'/maxresdefault.jpg';
+//                                   .'/hqdefault.jpg';
                     break;
                 case 'vimeo.com':
                     $this->type  = 'vimeo';
