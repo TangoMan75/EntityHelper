@@ -1,31 +1,51 @@
 {
-  "name": "tangoman/entity-helper",
-  "description": "Symfony Entity Helper",
-  "version": "2.1.2",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Matthias Morin",
-      "email": "matthias.morin@gmail.com"
-    }
-  ],
-  "type": "library",
-  "keywords": [
-    "TangoMan",
-    "Symfony",
-    "Entity",
-    "Helper",
-    "Traits"
-  ],
-  "require": {
-    "php": ">=5.3.0",
-    "vich/uploader-bundle": "1.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "TangoMan\\EntityHelper\\": ""
-    }
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "tangoman/entity-helper",
+    "description": "Symfony Entity Helper",
+    "version": "2.1.2",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "TangoMan",
+        "Symfony",
+        "Entity",
+        "Helper",
+        "Traits"
+    ],
+    "authors": [
+        {
+            "name": "Matthias Morin",
+            "email": "matthias.morin@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
+    ],
+    "require": {
+        "ext-json":             "*",
+        "ext-simplexml":        "*",
+        "php":                  ">=5.5.0",
+        "vich/uploader-bundle": "1.4"
+    },
+    "require-dev": {
+        "symfony/symfony":        "^3.4 !=3.4.13",
+        "symfony/phpunit-bridge": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "TangoMan\\EntityHelper\\": ""
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "Tests"
+        ]
+    },
+    "extra": {
+        "symfony-tests-dir": "Tests"
+     },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
